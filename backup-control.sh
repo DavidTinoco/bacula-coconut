@@ -23,11 +23,11 @@ do
 	elif [ $i == "minnie" ]; then
 		ip="172.22.200.74"
 	elif [ $i == "donald" ]; then
-		ip="172.22.200.74"
+		ip="172.22.200.75"
 	fi
 
 	if [ $status == 'T' ] && [ $fecha == $fechaSys ]; then
-		psql -h 172.22.200.110 -U david.tinoco -d db_backup -c "insert into backups (backup_user, backup_host, backup_label, backup_status, backup_mode) values ('david.tinoco', '$ip','$level','200','Automatica'"
+		psql -h 172.22.200.110 -U david.tinoco -d db_backup -c "insert into backups (backup_user, backup_host, backup_label, backup_status, backup_mode) values ('david.tinoco', '$ip','$level','200','Automatica')"
 	else
 		echo "Fallo al realizar la copia de seguridad de $i a día de $fechaSys " | /usr/bin/mail -s "Error en copias de seguridad" daviid.tc@gmail.com
 	fi

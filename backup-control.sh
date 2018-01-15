@@ -12,7 +12,7 @@ donald="'172.22.200.75'"
 
 for i in ${hosts[@]};
 do
-	registro=$(mariadb -e "select Level, JobStatus, max(date_format(RealEndTime,'%x-%m-%d')) from bacula.Job where Name='$i'")
+	registro=$(mariadb -e "select Level, JobStatus, max(date_format(RealEndTime,'%x-%m-%d')) from bacula.Job where Name='$i' and date_format(RealEndTime,'%x-%m-%d') = (select max(date_format(RealEndTime,'%x-%m-%d')) from bacula.Job where Name = '$i')")
 	level=$(echo $registro | cut -d " " -f 4)
 	status=$(echo $registro | cut -d " " -f 5)
 	fecha=$(echo $registro | cut -d " " -f 6)
